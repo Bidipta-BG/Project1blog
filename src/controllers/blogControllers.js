@@ -21,7 +21,10 @@ const createBlog = async function (req, res) {
 
 const getBlogs = async function (req, res) {
     try {
-        let savedBlogs = await blogModel.find({ isDeleted: false, isPublished: true }).populate("authorFresh")
+        // let data = req.query
+        // data.isDeleted=false
+        // data.isPublished = true
+        let savedBlogs = await blogModel.find({ isDeleted: false, isPublished: true  })
         res.status(200).send({ status: true, data: savedBlogs })
 
         if (!savedBlogs) res.status(404).send({ status: false, msg: "No data exist" })
