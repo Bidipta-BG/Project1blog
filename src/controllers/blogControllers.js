@@ -35,16 +35,34 @@ const getBlogs = async function (req, res) {
 
     }
 
-    // try {
-    //     let data = req.query
-    //     let savedBlogs = await blogModel.find(data).populate("authorFresh")
-    //     res.status(200).send({ status: true, data: savedBlogs })
-    // }
-    // catch (err) {
-    //     res.status(500).send({ msg: "Serverside Errors. Please try again later", error: err.message })
-    // }
 }
 
+
+const deleteBlogId = async function(req,res){
+
+    try{
+        const blogId =  req.params.blogId
+        const validId= await blogModel.findById(blogId)
+        if (!validId){
+            return res.status(400).send({status:false,msg: "Blog Id is invalid"})
+        }
+
+
+        if(validId.isDeleted === true)  res.send({msg : "it is deleted"})
+
+        const deleteDetails = await blogModel.findOneAndUpdate({_id : blogId},{isDeleted : true, deleteAt :new Date()},
+         {new : true})
+         res.status(201).send({status:true})
+
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send({status:false, msg:err.message})
+    }
+
+}
 module.exports.createBlog = createBlog
 module.exports.getBlogs = getBlogs
+module.exports.deleteBlogId = deleteBlogId
+
 
