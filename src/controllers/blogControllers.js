@@ -21,10 +21,11 @@ const createBlog = async function (req, res) {
 
 const getBlogs = async function (req, res) {
     try {
-        // let data = req.query
+        let data = req.query
         // data.isDeleted=false
         // data.isPublished = true
-        let savedBlogs = await blogModel.find({ isDeleted: false, isPublished: true  })
+        // let savedBlogs = await blogModel.find({isDeleted: false, isPublished: true  } , data ).populate("authorId")
+        let savedBlogs = await blogModel.find(data)
         res.status(200).send({ status: true, data: savedBlogs })
 
         if (!savedBlogs) res.status(404).send({ status: false, msg: "No data exist" })
@@ -34,14 +35,14 @@ const getBlogs = async function (req, res) {
 
     }
 
-    try {
-        let data = req.query
-        let savedBlogs = await blogModel.find(data).populate("authorFresh")
-        res.status(200).send({ status: true, data: savedBlogs })
-    }
-    catch (err) {
-        res.status(500).send({ msg: "Serverside Errors. Please try again later", error: err.message })
-    }
+    // try {
+    //     let data = req.query
+    //     let savedBlogs = await blogModel.find(data).populate("authorFresh")
+    //     res.status(200).send({ status: true, data: savedBlogs })
+    // }
+    // catch (err) {
+    //     res.status(500).send({ msg: "Serverside Errors. Please try again later", error: err.message })
+    // }
 }
 
 module.exports.createBlog = createBlog
