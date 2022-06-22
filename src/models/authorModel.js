@@ -18,9 +18,16 @@ const authorSchema = new mongoose.Schema({
         enum: ["Mr", "Mrs", "Miss"]
     },
     email: {
-        required: true,
-        type: String,
-        unique: true
+       
+        type:String,
+        required : true,
+        unique : true,
+        trim: true,
+        validate:{
+        validator: validator.isEmail,
+        message: '{VALUE} is not a valid email',
+        }
+
     },
     password: {
         required: true,

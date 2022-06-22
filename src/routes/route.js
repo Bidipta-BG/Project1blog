@@ -10,7 +10,11 @@ router.post("/createblog", blogController.createBlog)
 
 router.get("/getBlogs" , blogController.getBlogs)
 
+router.put("/blogs/:blogId", blogController.updateBlog)
+
 router.delete("/blogs/:blogId", blogController.deleteBlogId)
+
+router.delete("/blogs", blogController.deleteBlogIdAndQuery)
 
 
 

@@ -18,15 +18,19 @@ const blogSchema = new mongoose.Schema({
         ref: "author"
     },
     tags: [String],
+
     category: {
-        type : String,
-        required: true,
-        enum: ["technology", "entertainment", "life style", "food", "fashion"]
+        type: String,
+        required: true
     },
-    subcategory: { enum: ["technology", "web development", "mobile development", "AI", "ML"] },
+
+    subcategory: {
+        type: [String],
+        required: true
+    },
+
     deletedAt: {
-        type: Date,
-        default: Date.now
+        type: Date
     },
     isDeleted: {
         type: Boolean,
