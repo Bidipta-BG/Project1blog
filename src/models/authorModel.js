@@ -23,10 +23,10 @@ const authorSchema = new mongoose.Schema({
         required : true,
         unique : true,
         trim: true,
-        validate:{
-        validator: validator.isEmail,
-        message: '{VALUE} is not a valid email',
-        }
+        // validate:{
+        // validator: validator.isEmail,
+        // message: '{VALUE} is not a valid email',
+        // }
 
     },
     password: {
