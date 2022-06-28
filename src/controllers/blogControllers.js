@@ -152,7 +152,8 @@ const deleteBlogIdAndQuery = async function(req,res){
             data['subcategory'] = { $all: subCatArr }
         }
 
-        let updateData = await blogModel.updateMany(data, {$set: {isDeleted : true}})
+        let deleteDate = moment().format('YYYY-MM-DD h:mm:ss')
+        let updateData = await blogModel.updateMany(data, {deletedAt: deleteDate}, {$set: {isDeleted : true}})
         if(updateData.matchedCount==0){  //if combination of filtered documents doesnot exist
             return res.status(404).send({ status: false, msg: "Page/Resource not found. Blog Document doesnot exist for this filter"})
         }else{
